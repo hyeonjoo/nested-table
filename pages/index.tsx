@@ -1,4 +1,4 @@
-import Container from "../components/templates/Container";
+import Container from "@components/templates/Container";
 
 const IndexPage = () => (
   <Container>
