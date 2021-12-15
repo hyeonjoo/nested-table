@@ -1,3 +1,4 @@
+import Columns from "@components/modules/Columns";
 import Row from "@components/modules/Row";
 import Container from "@components/templates/Container";
 import { useStore } from "@store/StoreProvider";
@@ -18,16 +19,18 @@ const IndexPage = observer(() => {
   return (
     <Container>
       {records?.length > 0 ? (
-        <>
-          <div>{JSON.stringify(Object.keys(records[0].data))}</div>
-          <div>
-            {records.map((record, ind) => (
-              <Row key={ind} index={ind} record={record} />
-            ))}
-          </div>
-        </>
+        <table>
+          <tr className="column-names">
+            <td>{/* Fold Button */}</td>
+            <Columns data={Object.keys(records[0].data)} />
+            <td>{/* Delete Button */}</td>
+          </tr>
+          {records.map((record, ind) => (
+            <Row key={ind} index={ind} record={record} />
+          ))}
+        </table>
       ) : (
-        <div>Empty :)</div>
+        <h2>Empty :)</h2>
       )}
     </Container>
   );
