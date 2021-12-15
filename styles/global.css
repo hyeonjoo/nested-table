@@ -1,0 +1,39 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-size:13px;
+  }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  border: black 1px solid;
+  width: 100%;
+}
+
+td {
+  padding: 10px; 
+  margin: 0;
+}
+
+.btn-delete {
+  border: 0;
+  background-color: none;
+  font-weight: bold;
+}
+
+.column-names {
+  font-weight: bold;
+  background-color: mediumpurple;
+}
