@@ -12,9 +12,10 @@ interface DataColumnsProps {
 
 const DataColumns = observer(({ record, index }: DataColumnsProps) => {
   const store = useStore();
+  const dataColumns = Object.values(record.data);
   return (
     <>
-      {Object.values(record.data).map((value, index) => (
+      {dataColumns.map((value, index) => (
         <td key={index}>{value}</td>
       ))}
       <td>
@@ -29,9 +30,10 @@ interface ChildrenProps {
 }
 
 const Children = observer(({ kids }: ChildrenProps) => {
+  const children = Object.keys(kids);
   return (
     <td colSpan={20}>
-      {Object.keys(kids).map((kidName, index) => (
+      {children.map((kidName, index) => (
         <div key={index}>
           <h3>{kidName}</h3>
           <Table records={kids[kidName].records} />

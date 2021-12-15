@@ -30,8 +30,9 @@ export class Store {
       const kids: RecordKids = {};
       Object.keys(jsonRecord.kids).forEach((kidTitle: string) => {
         kids[kidTitle] = { records: [] };
+        const jsonKidData = jsonRecord.kids[kidTitle].records;
         kids[kidTitle].records = this.convertToRecords(
-          jsonRecord.kids[kidTitle].records,
+          jsonKidData,
           record,
           kidTitle
         );
