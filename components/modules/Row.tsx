@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import Record from "@models/Record";
 import { useState } from "react";
 import Table from "./Table";
-import { autorun } from "mobx";
 import { RecordKids } from "@models/RecordType";
 
 interface DataColumnsProps {
@@ -13,7 +12,6 @@ interface DataColumnsProps {
 
 const DataColumns = observer(({ record, index }: DataColumnsProps) => {
   const store = useStore();
-  autorun(() => console.log("columns"));
   return (
     <>
       {Object.values(record.data).map((value, index) => (
@@ -31,7 +29,6 @@ interface ChildrenProps {
 }
 
 const Children = observer(({ kids }: ChildrenProps) => {
-  autorun(() => console.log("Children"));
   return (
     <td colSpan={20}>
       {Object.keys(kids).map((kidName, index) => (
@@ -54,8 +51,6 @@ const Row = observer(({ record, index }: RowProps) => {
 
   const hasChildren = Object.keys(kids).length > 0;
   const [isFolded, setIsFolded] = useState<Boolean>(true);
-
-  autorun(() => console.log("hi"));
 
   return (
     <>
