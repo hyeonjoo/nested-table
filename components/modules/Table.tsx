@@ -1,18 +1,20 @@
 import { observer } from "mobx-react-lite";
 import Record from "@models/Record";
 import Row from "./Row";
+import { useState } from "react";
 
 interface TableProps {
   records: Record[];
 }
 
 const Table = observer(({ records }: TableProps) => {
+  const [headers] = useState<string[]>(Object.keys(records[0].data));
   return (
     <table>
       <thead>
         <tr>
           <th>{/* Fold Button */}</th>
-          {Object.keys(records[0].data).map((record, index) => (
+          {headers.map((record, index) => (
             <th key={index}>{record}</th>
           ))}
           <th>{/* Delete Button */}</th>
