@@ -7,7 +7,7 @@ import { useEffect } from "react";
 const IndexPage = observer(() => {
   const store = useStore();
   autorun(() => {
-    console.log(JSON.stringify(store.records));
+    console.log(store.records);
   });
   useEffect(() => {
     store.fetch();
