@@ -3,6 +3,46 @@ import { observer } from "mobx-react-lite";
 import Record from "@models/Record";
 import { useState } from "react";
 import Table from "./Table";
+import { autorun } from "mobx";
+import { RecordKids } from "@models/RecordType";
+
+interface DataColumnsProps {
+  record: Record;
+  index: number;
+}
+
+const DataColumns = observer(({ record, index }: DataColumnsProps) => {
+  const store = useStore();
+  autorun(() => console.log("columns"));
+  return (
+    <>
+      {Object.values(record.data).map((value, index) => (
+        <td key={index}>{value}</td>
+      ))}
+      <td>
+        <button onClick={() => record.removeMe(index, store)}>Delete</button>
+      </td>
+    </>
+  );
+});
+
+interface ChildrenProps {
+  kids: RecordKids;
+}
+
+const Children = observer(({ kids }: ChildrenProps) => {
+  autorun(() => console.log("Children"));
+  return (
+    <td colSpan={20}>
+      {Object.keys(kids).map((kidName, index) => (
+        <div key={index}>
+          <h3>{kidName}</h3>
+          <Table records={kids[kidName].records} />
+        </div>
+      ))}
+    </td>
+  );
+});
 
 interface RowProps {
   record: Record;
@@ -10,11 +50,12 @@ interface RowProps {
 }
 
 const Row = observer(({ record, index }: RowProps) => {
-  const store = useStore();
   const kids = record.kids;
 
   const hasChildren = Object.keys(kids).length > 0;
   const [isFolded, setIsFolded] = useState<Boolean>(true);
+
+  autorun(() => console.log("hi"));
 
   return (
     <>
@@ -26,23 +67,11 @@ const Row = observer(({ record, index }: RowProps) => {
             </button>
           ) : null}
         </td>
-        {Object.values(record.data).map((value, index) => (
-          <td key={index}>{value}</td>
-        ))}
-        <td>
-          <button onClick={() => record.removeMe(index, store)}>Delete</button>
-        </td>
+        <DataColumns record={record} index={index} />
       </tr>
       {hasChildren ? (
         <tr style={isFolded ? { display: "none" } : null}>
-          <td colSpan={20}>
-            {Object.keys(kids).map((kidName, index) => (
-              <div key={index}>
-                <h3>{kidName}</h3>
-                <Table records={kids[kidName].records} />
-              </div>
-            ))}
-          </td>
+          <Children kids={kids} />
         </tr>
       ) : null}
     </>
