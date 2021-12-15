@@ -27,9 +27,12 @@ td {
   margin: 0;
 }
 
-.btn-delete {
+button {
   border: 0;
-  background-color: none;
+  background-color: white;
+}
+
+.btn-delete {
   font-weight: bold;
 }
 

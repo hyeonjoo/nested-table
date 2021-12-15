@@ -3,6 +3,7 @@ import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
 import Record from "@models/Record";
 import Columns from "./Columns";
+import { useState } from "react";
 
 interface RowProps {
   record: Record;
@@ -13,6 +14,9 @@ const Row = observer(({ record, index }: RowProps) => {
   const store = useStore();
   const kids = record.kids;
 
+  const hasChildren = Object.keys(kids).length > 0;
+  const [isFolded, setIsFolded] = useState<Boolean>(true);
+
   autorun((reaction) => {
     reaction.trace();
     console.log(record);
@@ -21,7 +25,11 @@ const Row = observer(({ record, index }: RowProps) => {
     <>
       <tr>
         <td>
-          <button>fold</button>
+          {hasChildren ? (
+            <button onClick={() => setIsFolded(!isFolded)}>
+              {isFolded ? "▶" : "▼"}
+            </button>
+          ) : null}
         </td>
         <Columns data={Object.values(record.data)} />
         <td>
@@ -33,8 +41,8 @@ const Row = observer(({ record, index }: RowProps) => {
           </button>
         </td>
       </tr>
-      {Object.keys(kids).length > 0 ? (
-        <tr>
+      {hasChildren ? (
+        <tr style={isFolded ? { display: "none" } : null}>
           <td colSpan={20}>
             {Object.keys(kids).map((kidName, ind) => (
               <div>
