@@ -8,9 +8,7 @@ const Columns = ({ data }: ColumnsProps) => {
   return (
     <>
       {data.map((value, index) => (
-        <td key={index} style={{ flex: "1 1 0" }}>
-          {value}
-        </td>
+        <td key={index}>{value}</td>
       ))}
     </>
   );
