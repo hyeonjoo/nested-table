@@ -22,20 +22,18 @@ export class Store {
     fetchData();
   };
 
-  convertToRecords = (data: Record[], parent = null, title = null) => {
+  convertToRecords = (jsonData: Record[], parent = null, title = null) => {
     const records: Record[] = [];
-    data.forEach((el: Record) => {
-      const record = new Record(parent, title, el.data);
+    jsonData.forEach((jsonRecord: Record) => {
+      const record = new Record(parent, title, jsonRecord.data);
       const kids: IRecordKids = {};
-      Object.keys(el.kids).forEach((kidTitle: string) => {
-        if (el.kids[kidTitle].records.length > 0) {
-          kids[kidTitle] = { records: [] };
-          kids[kidTitle].records = this.convertToRecords(
-            el.kids[kidTitle].records,
-            record,
-            kidTitle
-          );
-        }
+      Object.keys(jsonRecord.kids).forEach((kidTitle: string) => {
+        kids[kidTitle] = { records: [] };
+        kids[kidTitle].records = this.convertToRecords(
+          jsonRecord.kids[kidTitle].records,
+          record,
+          kidTitle
+        );
       });
       record.kids = kids;
       records.push(record);
