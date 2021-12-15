@@ -25,4 +25,21 @@ export default class Record implements RecordType {
     if (this.parentRecord) this.parentRecord.removeKid(this.titleGroup, index);
     else store.records.splice(index, 1);
   };
+
+  getObj = () => {
+    let retKids = {};
+    for (const [key, kidObj] of Object.entries(this.kids)) {
+      let ret = [];
+      kidObj.records.forEach((kid: Record) => {
+        ret.push(kid.getObj());
+      });
+      retKids[key] = {
+        records: ret,
+      };
+    }
+    return {
+      data: this.data,
+      kids: retKids,
+    };
+  };
 }
