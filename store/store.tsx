@@ -17,7 +17,7 @@ export class Store {
       fetch("http://localhost:3000/api/data")
         .then((res) => res.json())
         .then((data: Record[]) => {
-          this.records = this.convertToRecords(data);
+          this.records = this.convertToRecords(data); // Initialize nested Record instance
         });
     };
     fetchData();
