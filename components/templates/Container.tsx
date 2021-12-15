@@ -1,12 +1,12 @@
 import React, { ReactNode } from "react";
 import Head from "next/head";
 
-type Props = {
+interface ContainerProps {
   children?: ReactNode;
   title?: string;
-};
+}
 
-const Container = ({ children, title = "Hello World" }: Props) => (
+const Container = ({ children, title = "Hello World" }: ContainerProps) => (
   <div>
     <Head>
       <title>{title}</title>
