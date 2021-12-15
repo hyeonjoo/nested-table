@@ -28,12 +28,14 @@ export class Store {
       const record = new Record(parent, title, el.data);
       const kids: IRecordKids = {};
       Object.keys(el.kids).forEach((kidTitle: string) => {
-        kids[kidTitle] = { records: [] };
-        kids[kidTitle].records = this.convertToRecords(
-          el.kids[kidTitle].records,
-          record,
-          kidTitle
-        );
+        if (el.kids[kidTitle].records.length > 0) {
+          kids[kidTitle] = { records: [] };
+          kids[kidTitle].records = this.convertToRecords(
+            el.kids[kidTitle].records,
+            record,
+            kidTitle
+          );
+        }
       });
       record.kids = kids;
       records.push(record);
