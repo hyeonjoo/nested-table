@@ -5,7 +5,7 @@ import Record, { IRecordKids } from "model/Record";
 enableStaticRendering(typeof window === "undefined");
 
 export class Store {
-  records: Record[];
+  records: Record[] = [];
 
   constructor() {
     makeAutoObservable(this);
