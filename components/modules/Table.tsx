@@ -1,14 +1,13 @@
 import { observer } from "mobx-react-lite";
 import Record from "@models/Record";
 import Row from "./Row";
-import { useState } from "react";
 
 interface TableProps {
   records: Record[];
 }
 
 const Table = observer(({ records }: TableProps) => {
-  const [headers] = useState<string[]>(Object.keys(records[0].data));
+  const headers = Object.keys(records[0].data);
   return (
     <table>
       <thead>
