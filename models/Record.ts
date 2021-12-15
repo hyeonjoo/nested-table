@@ -1,29 +1,14 @@
 import { Store } from "@store/store";
+import RecordType, { RecordData, RecordKids } from "@models/RecordType";
 import { makeAutoObservable } from "mobx";
 
-export interface IRecordData {
-  [key: string]: string;
-}
-
-export interface IRecordKids {
-  [key: string]: {
-    records: Record[];
-  };
-}
-
-interface IRecord {
-  parentRecord: Record;
-  titleGroup: string;
-  data: IRecordData;
-  kids: IRecordKids;
-}
-
-class Record implements IRecord {
+export default class Record implements RecordType {
   readonly titleGroup: string;
   readonly parentRecord: Record;
-  readonly data: IRecordData;
-  kids: IRecordKids;
-  constructor(parentRecord: Record, titleGroup: string, data: IRecordData) {
+  readonly data: RecordData;
+  kids: RecordKids;
+
+  constructor(parentRecord: Record, titleGroup: string, data: RecordData) {
     makeAutoObservable(this);
     this.parentRecord = parentRecord;
     this.titleGroup = titleGroup;
@@ -41,5 +26,3 @@ class Record implements IRecord {
     else store.records.splice(index, 1);
   };
 }
-
-export default Record;

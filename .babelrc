@@ -6,7 +6,6 @@
       {
         "alias": {
           "@components": "./components",
-          "@interfaces": "./interfaces",
           "@models": "./models",
           "@pages": "./pages",
           "@store": "./store",

@@ -22,7 +22,12 @@ table {
   width: 100%;
 }
 
-td {
+thead {
+  font-weight: bold;
+  background-color: mediumpurple;
+}
+
+td, th {
   padding: 10px; 
   margin: 0;
 }
@@ -30,13 +35,5 @@ td {
 button {
   border: 0;
   background-color: white;
-}
-
-.btn-delete {
   font-weight: bold;
-}
-
-.column-names {
-  font-weight: bold;
-  background-color: mediumpurple;
 }
