@@ -22,7 +22,7 @@ const IndexPage = observer(() => {
           <div>{JSON.stringify(Object.keys(records[0].data))}</div>
           <div>
             {records.map((record, ind) => (
-              <Row key={ind} record={record} />
+              <Row key={ind} index={ind} record={record} />
             ))}
           </div>
         </>
