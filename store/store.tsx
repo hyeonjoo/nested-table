@@ -1,11 +1,11 @@
 import { makeAutoObservable } from "mobx";
 import { enableStaticRendering } from "mobx-react-lite";
-import Record, { IRecordKids } from "model/Record";
+import Record, { IRecordKids } from "@models/Record";
 
 enableStaticRendering(typeof window === "undefined");
 
 export class Store {
-  records: Record[];
+  records: Record[] = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -28,12 +28,14 @@ export class Store {
       const record = new Record(parent, title, el.data);
       const kids: IRecordKids = {};
       Object.keys(el.kids).forEach((kidTitle: string) => {
-        kids[kidTitle] = { records: [] };
-        kids[kidTitle].records = this.convertToRecords(
-          el.kids[kidTitle].records,
-          record,
-          kidTitle
-        );
+        if (el.kids[kidTitle].records.length > 0) {
+          kids[kidTitle] = { records: [] };
+          kids[kidTitle].records = this.convertToRecords(
+            el.kids[kidTitle].records,
+            record,
+            kidTitle
+          );
+        }
       });
       record.kids = kids;
       records.push(record);
