@@ -23,7 +23,7 @@ const IndexPage = observer(() => {
 
 const RecordsToJSON = observer(() => {
   const store = useStore();
-  const [recordsInJSON, setRecordsInJSON] = useState(store.recordsToJSON());
+  const [recordsInJSON, setRecordsInJSON] = useState<String>("");
   return (
     <>
       <button onClick={() => setRecordsInJSON(store.recordsToJSON())}>
