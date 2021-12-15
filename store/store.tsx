@@ -42,4 +42,12 @@ export class Store {
     });
     return records;
   };
+
+  recordsToJSON = () => {
+    let ret = [];
+    this.records.forEach((record) => {
+      ret.push(record.getObj());
+    });
+    return JSON.stringify(ret);
+  };
 }
