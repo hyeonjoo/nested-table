@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { enableStaticRendering } from "mobx-react-lite";
-import Record, { IRecordKids } from "@models/Record";
+import { RecordKids } from "@models/RecordType";
+import Record from "@models/Record";
 
 enableStaticRendering(typeof window === "undefined");
 
@@ -26,7 +27,7 @@ export class Store {
     const records: Record[] = [];
     jsonData.forEach((jsonRecord: Record) => {
       const record = new Record(parent, title, jsonRecord.data);
-      const kids: IRecordKids = {};
+      const kids: RecordKids = {};
       Object.keys(jsonRecord.kids).forEach((kidTitle: string) => {
         kids[kidTitle] = { records: [] };
         kids[kidTitle].records = this.convertToRecords(
