@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { enableStaticRendering } from "mobx-react-lite";
-import Record, { IRecordKids } from "model/Record";
+import Record, { IRecordKids } from "@models/Record";
 
 enableStaticRendering(typeof window === "undefined");
 
