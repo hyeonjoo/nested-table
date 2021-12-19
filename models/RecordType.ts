@@ -11,8 +11,9 @@ export interface RecordKids {
 }
 
 export default interface RecordType {
-  parentRecord: Record;
+  id: string;
   titleGroup: string;
+  parentRecord: Record;
   data: RecordData;
   kids: RecordKids;
 }
