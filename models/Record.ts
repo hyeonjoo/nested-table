@@ -3,13 +3,20 @@ import RecordType, { RecordData, RecordKids } from "@models/RecordType";
 import { makeAutoObservable } from "mobx";
 
 export default class Record implements RecordType {
+  readonly id: string;
   readonly titleGroup: string;
   readonly parentRecord: Record;
   readonly data: RecordData;
   kids: RecordKids;
 
-  constructor(parentRecord: Record, titleGroup: string, data: RecordData) {
+  constructor(
+    id: string,
+    parentRecord: Record,
+    titleGroup: string,
+    data: RecordData
+  ) {
     makeAutoObservable(this);
+    this.id = id;
     this.parentRecord = parentRecord;
     this.titleGroup = titleGroup;
     this.data = data;
@@ -21,9 +28,17 @@ export default class Record implements RecordType {
       delete this.kids[title];
     }
   };
-  removeMe = (index: number, store: Store) => {
-    if (this.parentRecord) this.parentRecord.removeKid(this.titleGroup, index);
-    else store.records.splice(index, 1);
+  removeMe = (id: string, store: Store) => {
+    if (this.parentRecord) {
+      console.log(this.parentRecord.kids, this.titleGroup);
+      const index = this.parentRecord.kids[this.titleGroup].records.findIndex(
+        (el) => el.id === id
+      );
+      this.parentRecord.removeKid(this.titleGroup, index);
+    } else {
+      const index = store.records.findIndex((el) => el.id === id);
+      store.records.splice(index, 1);
+    }
   };
 
   getObj = () => {
