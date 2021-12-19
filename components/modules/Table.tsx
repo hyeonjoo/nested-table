@@ -20,8 +20,8 @@ const Table = observer(({ records }: TableProps) => {
         </tr>
       </thead>
       <tbody>
-        {records.map((record, index) => (
-          <Row key={index} index={index} record={record} />
+        {records.map((record) => (
+          <Row key={record.id} index={record.id} record={record} />
         ))}
       </tbody>
     </table>
