@@ -7,7 +7,7 @@ import { RecordKids } from "@models/RecordType";
 
 interface DataColumnsProps {
   record: Record;
-  index: number;
+  index: string;
 }
 
 const DataColumns = observer(({ record, index }: DataColumnsProps) => {
@@ -33,8 +33,8 @@ const Children = observer(({ kids }: ChildrenProps) => {
   const children = Object.keys(kids);
   return (
     <td colSpan={20}>
-      {children.map((kidName, index) => (
-        <div key={index}>
+      {children.map((kidName) => (
+        <div key={kidName}>
           <h3>{kidName}</h3>
           <Table records={kids[kidName].records} />
         </div>
@@ -45,7 +45,7 @@ const Children = observer(({ kids }: ChildrenProps) => {
 
 interface RowProps {
   record: Record;
-  index: number;
+  index: string;
 }
 
 const Row = observer(({ record, index }: RowProps) => {
