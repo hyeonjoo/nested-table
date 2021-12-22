@@ -4,6 +4,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "pre": "yarn install --production=false",
     "type-check": "tsc"
   },
   "dependencies": {
